@@ -1,3 +1,4 @@
+# CodePipeline IAM Role
 resource "aws_iam_role" "tf-codepipeline-role" {
   name = "tf-codepipeline-role"
 
@@ -16,37 +17,39 @@ resource "aws_iam_role" "tf-codepipeline-role" {
   ]
 }
 EOF
-
 }
 
+# CodePipeline IAM Policies
 data "aws_iam_policy_document" "tf-cicd-pipeline-policies" {
-    statement{
-        sid = ""
-        actions = ["codestar-connections:UseConnection"]
-        resources = ["*"]
-        effect = "Allow"
-    }
-    statement{
-        sid = ""
-        actions = ["cloudwatch:*", "s3:*", "codebuild:*", "kms:Decrypt"]
-        resources = ["*"]
-        effect = "Allow"
-    }
+  statement {
+    sid      = ""
+    actions  = ["codestar-connections:UseConnection"]
+    resources = ["*"]
+    effect   = "Allow"
+  }
+
+  statement {
+    sid      = ""
+    actions  = ["cloudwatch:*", "s3:*", "codebuild:*", "kms:Decrypt"]
+    resources = ["*"]
+    effect   = "Allow"
+  }
 }
 
+# Attach Policy to CodePipeline Role
 resource "aws_iam_policy" "tf-cicd-pipeline-policy" {
-    name = "tf-cicd-pipeline-policy"
-    path = "/"
-    description = "Pipeline policy"
-    policy = data.aws_iam_policy_document.tf-cicd-pipeline-policies.json
+  name        = "tf-cicd-pipeline-policy"
+  path        = "/"
+  description = "Pipeline policy"
+  policy      = data.aws_iam_policy_document.tf-cicd-pipeline-policies.json
 }
 
 resource "aws_iam_role_policy_attachment" "tf-cicd-pipeline-attachment" {
-    policy_arn = aws_iam_policy.tf-cicd-pipeline-policy.arn
-    role = aws_iam_role.tf-codepipeline-role.id
+  policy_arn = aws_iam_policy.tf-cicd-pipeline-policy.arn
+  role       = aws_iam_role.tf-codepipeline-role.id
 }
 
-
+# CodeBuild IAM Role
 resource "aws_iam_role" "tf-codebuild-role" {
   name = "tf-codebuild-role"
 
@@ -65,31 +68,33 @@ resource "aws_iam_role" "tf-codebuild-role" {
   ]
 }
 EOF
-
 }
 
+# CodeBuild IAM Policies
 data "aws_iam_policy_document" "tf-cicd-build-policies" {
-    statement{
-        sid = ""
-        actions = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*","iam:*", "kms:Decrypt"]
-        resources = ["*"]
-        effect = "Allow"
-    }
+  statement {
+    sid      = ""
+    actions  = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*", "iam:*", "kms:Decrypt"]
+    resources = ["*"]
+    effect   = "Allow"
+  }
 }
 
+# Attach CodeBuild Policy
 resource "aws_iam_policy" "tf-cicd-build-policy" {
-    name = "tf-cicd-build-policy"
-    path = "/"
-    description = "Codebuild policy"
-    policy = data.aws_iam_policy_document.tf-cicd-build-policies.json
+  name        = "tf-cicd-build-policy"
+  path        = "/"
+  description = "Codebuild policy"
+  policy      = data.aws_iam_policy_document.tf-cicd-build-policies.json
 }
 
 resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment1" {
-    policy_arn  = aws_iam_policy.tf-cicd-build-policy.arn
-    role        = aws_iam_role.tf-codebuild-role.id
+  policy_arn = aws_iam_policy.tf-cicd-build-policy.arn
+  role       = aws_iam_role.tf-codebuild-role.id
 }
 
+# Attach AWS PowerUserAccess Policy to CodeBuild Role
 resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
-    policy_arn  = "arn:aws:iam::aws:policy/PowerUserAccess"
-    role        = aws_iam_role.tf-codebuild-role.id
+  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+  role       = aws_iam_role.tf-codebuild-role.id
 }
