@@ -71,7 +71,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             output_artifacts = ["tf-code"]
             configuration = {
                 FullRepositoryId = "GivenCingco/bitcube-terraform"
-                BranchName   = "master"
+                BranchName   = "main"
                 ConnectionArn = var.codestart_connector_cred
                 OutputArtifactFormat = "CODE_ZIP"
             }
@@ -88,7 +88,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             owner = "AWS"
             input_artifacts = ["tf-code"]
             configuration = {
-                ProjectName = "tf-cicd-plan"
+                ProjectName = "tf-cicd-plan2"
             }
         }
     }
