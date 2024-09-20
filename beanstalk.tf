@@ -1,0 +1,17 @@
+resource "aws_elastic_beanstalk_application" "app" {
+  name        = "nextjs-app"
+  description = "Nextjs app"
+}
+
+resource "aws_elastic_beanstalk_environment" "env" {
+  name                = "nextjs-app-env"
+  application         = aws_elastic_beanstalk_application.app.name
+  solution_stack_name = "64bit Amazon Linux 2 v5.9.6 running Node.js 18"
+
+  # Add the instance profile created above
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "IamInstanceProfile"
+    value     = aws_iam_instance_profile.elastic_beanstalk_instance_profile.name
+  }
+}
