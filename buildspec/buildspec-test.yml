@@ -22,7 +22,7 @@ phases:
       - echo "NPM version:"
       - npm -v
       - echo Running tests...
-      - npm test
+      - npm run test
 
 artifacts:
   base-directory: '.next'
