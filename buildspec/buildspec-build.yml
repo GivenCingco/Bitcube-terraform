@@ -17,6 +17,7 @@ phases:
       - echo "Build complete."
 
 artifacts:
+  base-directory: '.next'
   files:
     - '**/*'
-  base-directory: '.next'
+  
