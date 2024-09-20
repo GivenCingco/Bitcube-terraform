@@ -41,7 +41,8 @@ data "aws_iam_policy_document" "tf-cicd-pipeline-policies" {
       "codedeploy:GetDeployment",
       "codedeploy:BatchGetApplications",
       "codedeploy:BatchGetDeployments",
-      "codedeploy:RegisterApplicationRevision"
+      "codedeploy:RegisterApplicationRevision",
+      "codedeploy:GetDeploymentConfig" 
     ]
     resources = ["*"]
     effect   = "Allow"
