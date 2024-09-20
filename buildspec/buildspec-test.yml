@@ -13,6 +13,7 @@ phases:
       - npm test
 
 artifacts:
+  base-directory: .
   files:
     - '**/*'
-  base-directory: .
+    - 'reports/**/*'
