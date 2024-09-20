@@ -5,32 +5,25 @@ phases:
     runtime-versions:
       nodejs: 18.x
     commands:
-      - echo Installing dependencies...
+      - echo "Installing dependencies..."
       - npm install
+      - echo "Installed packages:"
+      - npm list --depth=0
   build:
     commands:
       - echo "Current directory:"
       - pwd
       - echo "Contents of the directory:"
       - ls -la
-      - echo "Installed packages:"
-      - npm list --depth=0
-      - echo "Node version:"
-      - node -v
+      - echo "Contents of package.json:"
+      - cat package.json
       - echo "NPM version:"
       - npm -v
       - echo Running tests...
       - npm test
-      - echo "Building the application..."
-      - npm run build
-      - echo "Contents of the .next directory:"
-      - ls -la .next
-  post_build:
-    commands:
-      - echo "Build complete."
 
 artifacts:
-  base-directory: .next
+  base-directory: .
   files:
     - '**/*'
     - 'reports/**/*'
