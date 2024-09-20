@@ -86,7 +86,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       input_artifacts  = ["source-output"]
       output_artifacts = ["build-output"]
       configuration = {
-        ProjectName = aws_codebuild_project.build_stage.name
+        ProjectName = aws_codebuild_project.build_test_stage.name
       }
     }
   }

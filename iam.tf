@@ -32,7 +32,17 @@ data "aws_iam_policy_document" "tf-cicd-pipeline-policies" {
 
   statement {
     sid      = ""
-    actions  = ["cloudwatch:*", "s3:*", "codebuild:*", "kms:Decrypt"]
+    actions  = [
+      "cloudwatch:*",
+      "s3:*",
+      "codebuild:*",
+      "kms:Decrypt",
+      "codedeploy:CreateDeployment",
+      "codedeploy:GetDeployment",
+      "codedeploy:BatchGetApplications",
+      "codedeploy:BatchGetDeployments",
+      "codedeploy:RegisterApplicationRevision"
+    ]
     resources = ["*"]
     effect   = "Allow"
   }
@@ -204,7 +214,7 @@ resource "aws_iam_role_policy_attachment" "beanstalk_managed_policy" {
 # Optionally attach an additional policy if required for extra services
 resource "aws_iam_role_policy_attachment" "beanstalk_additional_policy" {
   role       = aws_iam_role.elastic_beanstalk_instance_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"  # Example for S3 access
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"  
 }
 
 # Create an IAM Instance Profile for Elastic Beanstalk
