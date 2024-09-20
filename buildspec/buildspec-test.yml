@@ -21,9 +21,16 @@ phases:
       - npm -v
       - echo Running tests...
       - npm test
+      - echo "Building the application..."
+      - npm run build
+      - echo "Contents of the .next directory:"
+      - ls -la .next
+  post_build:
+    commands:
+      - echo "Build complete."
 
 artifacts:
-  base-directory: .
+  base-directory: .next
   files:
     - '**/*'
     - 'reports/**/*'
