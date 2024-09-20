@@ -11,7 +11,8 @@ phases:
       - npm list --depth=0
   build:
     commands:
-      - cd /codebuild/output/src1383166649/src
+      - echo "Navigating to source directory..."
+      - cd $CODEBUILD_SRC_DIR
       - echo "Current directory:"
       - pwd
       - echo "Contents of the directory:"
