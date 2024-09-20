@@ -6,7 +6,7 @@ phases:
       nodejs: 18.x
     commands:
       - echo "Installing dependencies..."
-      - npm ci
+      - npm install
       - echo "Installed packages:"
       - npm list --depth=0
   build:
