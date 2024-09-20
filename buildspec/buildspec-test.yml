@@ -9,6 +9,16 @@ phases:
       - npm install
   build:
     commands:
+      - echo "Current directory:"
+      - pwd
+      - echo "Contents of the directory:"
+      - ls -la
+      - echo "Installed packages:"
+      - npm list --depth=0
+      - echo "Node version:"
+      - node -v
+      - echo "NPM version:"
+      - npm -v
       - echo Running tests...
       - npm test
 
