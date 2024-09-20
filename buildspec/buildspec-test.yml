@@ -6,11 +6,12 @@ phases:
       nodejs: 18.x
     commands:
       - echo "Installing dependencies..."
-      - npm install
+      - npm ci
       - echo "Installed packages:"
       - npm list --depth=0
   build:
     commands:
+      - cd /codebuild/output/src1383166649/src
       - echo "Current directory:"
       - pwd
       - echo "Contents of the directory:"
@@ -23,7 +24,7 @@ phases:
       - npm test
 
 artifacts:
-  base-directory: .
+  base-directory: .next
   files:
     - '**/*'
     - 'reports/**/*'
