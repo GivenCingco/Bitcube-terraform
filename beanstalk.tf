@@ -17,13 +17,13 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MinSize"
-    value     = "1"
+    value     = "2"
   }
 
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MaxSize"
-    value     = "1"
+    value     = "3"
   }
     setting {
     namespace = "aws:autoscaling:launchconfiguration"
