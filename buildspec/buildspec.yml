@@ -21,7 +21,8 @@ phases:
       - echo "Build and test complete."
 
 artifacts:
-  base-directory: '.next'
+  base-directory: '.'
   files:
     - '**/*'
     - 'reports/**/*'
+    - 'appspec.yml'
