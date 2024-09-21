@@ -121,8 +121,8 @@ resource "aws_codepipeline" "cicd_pipeline" {
         ApplicationName     = aws_codedeploy_app.app.name
         DeploymentGroupName = aws_codedeploy_deployment_group.deployment_group.deployment_group_name
         S3Location = {
-        Bucket = module.s3_bucket.s3_bucket_id  // Your S3 bucket name
-        Key    = "my-nextjs-app.zip"  // Update this to the correct path
+        S3Bucket = module.s3_bucket.s3_bucket_id 
+        S3Key    = "my-nextjs-app.zip"  
       }
       }
     }
