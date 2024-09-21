@@ -31,17 +31,22 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "t2.micro"  # Replace with your desired instance type
   }
 
-  # setting {
-  #   namespace = "aws:elasticbeanstalk:environment"
-  #   name      = "DeploymentPolicy"
-  #   value     = "CodeDeploy"
-  # }
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "SecurityGroups"
+    value     = module.eb_sg.security_group_id # Replace with your desired instance type
+  }
 
-  # setting {
-  #   namespace = "aws:elasticbeanstalk:environment:process:default"
-  #   name      = "DeploymentPolicy"
-  #   value     = "CodeDeploy"
-  # }
-  
+   setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "VPCId"
+    value     = module.vpc.vpc_id  # Replace with your desired instance type
+  }
+
+   setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "Subnets"
+    value     = join(",", module.vpc.public_subnets)  # Replace with your desired instance type
+  }
 
 }

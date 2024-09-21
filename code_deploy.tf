@@ -23,6 +23,7 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
     enabled = true
     events  = ["DEPLOYMENT_FAILURE"]
   }
+  
 }
 
 output "deployment_group_name" {
