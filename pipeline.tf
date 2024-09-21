@@ -120,7 +120,6 @@ resource "aws_codepipeline" "cicd_pipeline" {
       configuration = {
         ApplicationName     = aws_codedeploy_app.app.name
         DeploymentGroupName = aws_codedeploy_deployment_group.deployment_group.deployment_group_name
-        S3Location = "${module.s3_bucket.s3_bucket_id}/my-nextjs-app.zip" 
       }
     }
   }
