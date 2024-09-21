@@ -25,6 +25,11 @@ resource "aws_elastic_beanstalk_environment" "env" {
     name      = "MaxSize"
     value     = "1"
   }
+    setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "InstanceType"
+    value     = "t2.micro"  # Replace with your desired instance type
+  }
 
   # setting {
   #   namespace = "aws:elasticbeanstalk:environment"
