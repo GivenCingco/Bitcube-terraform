@@ -9,13 +9,15 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
   deployment_group_name = "nextjs-deployment-group"
   service_role_arn      = aws_iam_role.tf-codedeploy-role.arn
 
-  ec2_tag_set {
-    ec2_tag_filter {
-      key   = "Name"
-      type  = "KEY_AND_VALUE"
-      value = "NextjsAppInstance"
-    }
-  }
+  deployment_config_name = "CodeDeployDefault.OneAtATime"
+  
+  # ec2_tag_set {
+  #   ec2_tag_filter {
+  #     key   = "Name"
+  #     type  = "KEY_AND_VALUE"
+  #     value = "NextjsAppInstance"
+  #   }
+  # }
 
   auto_rollback_configuration {
     enabled = true
