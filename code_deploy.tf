@@ -25,6 +25,23 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
   }
 }
 
+
+/* CodeDeploy Deployment */
+resource "aws_codedeploy_deployment" "deployment" {
+  app_name               = aws_codedeploy_app.app.name
+  deployment_group_name  = aws_codedeploy_deployment_group.deployment_group_name
+
+  // Specify the S3 bucket and key where your application ZIP file is located
+  revision {
+    revision_type = "S3"
+    s3_location {
+      bucket     = module.s3_bucket.s3_bucket_id  // Replace with your S3 bucket name
+      key        = "my-nextjs-app.zip"  // Path to your ZIP file in S3
+      bundle_type = "zip"
+    }
+  }
+}
+
 output "deployment_group_name" {
   value = aws_codedeploy_deployment_group.deployment_group.deployment_group_name
 }
