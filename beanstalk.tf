@@ -14,18 +14,29 @@ resource "aws_elastic_beanstalk_environment" "env" {
     name      = "IamInstanceProfile"
     value     = aws_iam_instance_profile.elastic_beanstalk_instance_profile.name
   }
-
   setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "DeploymentPolicy"
-    value     = "CodeDeploy"
+    namespace = "aws:autoscaling:asg"
+    name      = "MinSize"
+    value     = "1"
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:environment:process:default"
-    name      = "DeploymentPolicy"
-    value     = "CodeDeploy"
+    namespace = "aws:autoscaling:asg"
+    name      = "MaxSize"
+    value     = "1"
   }
+
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:environment"
+  #   name      = "DeploymentPolicy"
+  #   value     = "CodeDeploy"
+  # }
+
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:environment:process:default"
+  #   name      = "DeploymentPolicy"
+  #   value     = "CodeDeploy"
+  # }
   
 
 }
